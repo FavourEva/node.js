@@ -1,0 +1,39 @@
+---
+# tasks file for git_clone
+- name: update server
+  command: apt update
+
+- name: install git
+  command: apt install git -y
+
+- name: git clone
+  git:
+    repo: "https://{{token}}@github.com/michaelagbiaowei/demo.git"
+    dest: "{{path}}"
+  
+- name: move frontend to opt
+  command: "mv {{path}}/front-end {{path}}"
+
+- name: move backend to opt
+  command: "mv {{path}}/back-end {{path}}"
+
+- name: install node
+  command: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash -y
+
+- name: install node
+  command: . ~/.nvm/nvm.sh
+
+- name: install node
+  command: nvm install --lts -y
+
+- name: install node
+  command: node -e "console.log('Running Node.js ' + process.version)" 
+
+- name: install node
+  command: apt install nodejs -y
+
+- name: install node
+  command: apt install npm -y
+
+- name: install pm2
+  command: npm install pm2 -g -y

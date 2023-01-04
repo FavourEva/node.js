@@ -1,0 +1,16 @@
+---
+# tasks file for backend
+
+- name: Use NPM to update the target
+  command: npm update
+  args:
+    chdir: "{{path}}/back-end"
+  async: 42
+  poll: 0
+  become: yes
+  become_user: root
+
+- name: Install packages based on package.json using the npm
+    npm:
+      path: "{{ path }}/back-end"
+      state: present

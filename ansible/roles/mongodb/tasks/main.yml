@@ -1,0 +1,38 @@
+---
+# tasks file for mongodb
+
+- name: install mongodb
+  command: curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -y
+
+- name: install mongodb
+  command: echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list -y
+
+- name: install libssl
+  command: wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb -y
+
+- name: install libssl
+  command: sudo dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb -y
+
+- name: install libssl
+  command: apt install libssl1.1 -y
+
+- name:  install mongodb
+  command: curl https://gist.githubusercontent.com/cornflourblue/f0abd30f47d96d6ff127fe8a9e5bbd9f/raw/e3047c9dc3ce8b796e7354c92d2c47ce61981d2f/setup-nodejs-mongodb-production-server-on-ubuntu-1804.sh | sudo bash -y 
+
+- name: install mongodb
+  command: apt install mongodb-org -y
+
+- name: enable mongodb
+  command: systemctl enable mongod
+
+- name: start mongodb
+  command: systemctl start mongod.service
+
+- name: Use NPM to update the target
+  command: npm start
+  args:
+    chdir: "{{path}}/back-end"
+  async: 42
+  poll: 0
+  become: yes
+  become_user: root

@@ -1,0 +1,27 @@
+---
+# tasks file for frontend
+- name: Use NPM to update the target
+  command: npm update
+  args:
+    chdir: "{{path}}/front-end"
+  async: 42
+  poll: 0
+  become: yes
+  become_user: root
+
+- name: Install packages based on package.json using the npm
+    npm:
+      path: "{{ path }}front-end"
+      state: present
+
+- name: npm build command
+  command: export NODE_OPTIONS=--openssl-legacy-provider
+
+- name: Use NPM to build the target
+  command: npm build
+  args:
+    chdir: "{{path}}/front-end"
+  async: 42
+  poll: 0
+  become: yes
+  become_user: root
